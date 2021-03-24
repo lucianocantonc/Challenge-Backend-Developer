@@ -1,6 +1,6 @@
 # NF-Reader (Challenge-Backend-Developer)
 
-This API receives a JSON with the text of a "Nota Fiscal"(NF) and returns:
+This API receives a JSON with the text of a "Nota Fiscal of the São Paulo"(NF) state and returns:
 * NF Number
 * NF Value
 * NF Verification Code
