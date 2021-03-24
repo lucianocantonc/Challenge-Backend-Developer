@@ -24,14 +24,14 @@ def detect_text():
 
 def get_nf(text):
     nf = ''
-
+    word_to_find = 'nota'
     content = text.replace(' ', '').replace('\n', '')
-    x = content.lower().find('nota')
+    x = content.lower().find(word_to_find)
 
     for i in range(x, len(content)):
-        if content[i] in '0123456789':
+        if content[i].isdigit():
             nf += content[i]
-            if not content[i+1] in '0123456789':
+            if not content[i+1].isdigit():
                 break
         else:
             continue
@@ -39,9 +39,10 @@ def get_nf(text):
 
 def get_nf_value(text):
     nf_value = ''
+    word_to_find = 'valortotal'
 
     content = text.replace(' ', '').replace('\n', '')
-    x = content.lower().find('valortotal')
+    x = content.lower().find(word_to_find)
 
     for i in range(x, len(content)):
         if content[i] in '.,0123456789':
@@ -56,13 +57,13 @@ def get_nf_value(text):
 
 def get_ver_code(text):
     nf_verif_code = ''
-    magic_word = 'verificação'
+    word_to_find = 'verificação'
     verif_code_len = 9
 
     content = text.replace('\n', '')
-    x = content.lower().find(magic_word)
+    x = content.lower().find(word_to_find)
     
-    for i in range(x + len(magic_word), len(content)):
+    for i in range(x + len(word_to_find), len(content)):
         if content[i].isalpha():
             nf_verif_code = content[i: i+verif_code_len]
             break
