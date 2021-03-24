@@ -32,4 +32,14 @@ To obtain the JSON with the NF text:
 * Then click on **Show JSON** and copy the **"Response"** section
 * Now you can send this JSON to the API in a **POST Request**
 
+## Error Handling
+
+If you do the POST request and get a 404 error response with a JSON like this:
+
+        error_response = {
+            'message' : 'There is something wrong with your JSON'
+        }
+
+Check if you copied the correct section or the complete JSON returned from VISION API.
+
 
