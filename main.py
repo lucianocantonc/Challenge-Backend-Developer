@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 #principal function that gets the complete text of the image
-@app.route('/text_detector', methods=['POST'])
+@app.route('/text-detector', methods=['POST'])
 def detect_text():
     #image text is received as a json
     data = request.get_json()
