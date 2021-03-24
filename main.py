@@ -8,8 +8,17 @@ app = Flask(__name__)
 def detect_text():
     #image text is received as a json
     data = request.get_json()
-    #text ubication in the json
-    image_text = data['textAnnotations'][0]['description']
+    try:
+        #text ubication in the json
+        image_text = data['textAnnotations'][0]['description']
+    except:
+    #response if there is an error with the JSON on the request
+    #For example if you write 'descruption' instead of 'description'
+        error_response = {
+            'message' : 'There is something wrong with your JSON'
+        }
+        return jsonify(error_response), 400 
+
 
     nf_number = get_nf(image_text)
     nf_value = get_nf_value(image_text)
@@ -20,6 +29,7 @@ def detect_text():
         'value' : nf_value,
         'verificationCode' : nf_verif_code
     }
+
     #returns a json with the info requested
     return jsonify(response), 200
 
