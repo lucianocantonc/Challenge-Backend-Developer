@@ -32,7 +32,8 @@ def detect_text():
         'verificationCode' : nf_verif_code
     }
 
-    db.collection('NF').add(response)
+    db.collection('NF').document('NF-{}'.format(nf_number)).set(response)
+
 
     #returns a json with the info requested
     return jsonify(response), 200
@@ -101,4 +102,4 @@ def get_ver_code(text):
 
 if __name__ == '__main__':
     if os.environ.get('GAE_ENV') != 'standard':
-        app.run(host='127.0.0.1', port=8000, debug=True)
+        app.run(host='127.0.0.1', port=8080, debug=True)
