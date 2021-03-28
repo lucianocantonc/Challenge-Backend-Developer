@@ -1,7 +1,9 @@
+from google.cloud import firestore
 from flask import Flask, jsonify, request
 import os
 
 app = Flask(__name__)
+db = firestore.Client()
 
 #principal function that gets the complete text of the image
 @app.route('/text-detector', methods=['POST'])
@@ -29,6 +31,8 @@ def detect_text():
         'value' : nf_value,
         'verificationCode' : nf_verif_code
     }
+
+    db.collection('NF').add(response)
 
     #returns a json with the info requested
     return jsonify(response), 200
@@ -97,4 +101,4 @@ def get_ver_code(text):
 
 if __name__ == '__main__':
     if os.environ.get('GAE_ENV') != 'standard':
-        app.run(host='127.0.0.1', port=8080, debug=True)
+        app.run(host='127.0.0.1', port=8000, debug=True)
